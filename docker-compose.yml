@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=example
+      - DB_NAME=devopsdb
+      - PORT=3000
+      - APP_MESSAGE=Hello from Docker Compose!
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=devopsdb
+    ports:
+      - "5432:5432"
